@@ -35,16 +35,17 @@ func update(screen *ebiten.Image) error {
 	frame++
 
 	// TODO: 10フレーム間隔で画像を変更する
+
+	if ebiten.IsDrawingSkipped() {
+		return nil
+	}
+
 	// TODO: x0, y0, x1, y1を指定してスプライト画像を矩形で区切る
 	// x0 := ...
 	// y0 := ...
 	// x1 := ...
 	// y1 := ...
 	// gopher := image.Rect(x0, y0, x1, y1)
-
-	if ebiten.IsDrawingSkipped() {
-		return nil
-	}
 
 	// TODO: SubImageを使用して矩形領域の画像を表示する
 
