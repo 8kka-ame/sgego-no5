@@ -48,6 +48,13 @@ func update(screen *ebiten.Image) error {
 		spriteNum = 0
 	}
 
+	if ebiten.IsDrawingSkipped() {
+		return nil
+	}
+
+	// TODO: ループでタイルを描画する
+	// 移動しているように見せるには、「1~10フレームはそのまま表示し、11~20フレームはタイル画像を半分ずらす」を繰り返す
+
 	characterOp := &ebiten.DrawImageOptions{}
 	// TODO: キャラクターをタイルの上に移動させる
 
@@ -57,16 +64,9 @@ func update(screen *ebiten.Image) error {
 	y1 := characterHeight
 	gopher := image.Rect(x0, y0, x1, y1)
 
-	if ebiten.IsDrawingSkipped() {
-		return nil
-	}
-
 	if err := screen.DrawImage(character.SubImage(gopher).(*ebiten.Image), characterOp); err != nil {
 		return err
 	}
-
-	// TODO: ループでタイルを描画する
-	// TODO: 移動しているように見せるには、「1~10フレームはそのまま表示し、11~20フレームはタイル画像を半分ずらす」を繰り返す
 
 	return nil
 }
